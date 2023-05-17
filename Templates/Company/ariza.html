@@ -1,0 +1,17 @@
+{% extends 'accounts/base.html' %}
+
+{% block content %}
+
+<form action="." method="post" class="form-group p-5">
+    <input type="text" class="form-control mb-2" name="name" id="" placeholder="Ism-Familiyangiz">
+    <input type="text" class="form-control mb-2" name="contact" id="" placeholder="Telefon raqam yoki email pochtangiz">
+    <textarea name="message" id="" class="form-control mb-2" rows="10" placeholder="Xabar matni"></textarea> 
+    <input type="submit" class="btn btn-primary  py-2 px-5" value="Yuborish">  
+    <input type="hidden" class="form-control " name="company" value="{{company}}"> 
+    {% csrf_token %}
+</form>
+
+{% endblock content %}
+
+
+

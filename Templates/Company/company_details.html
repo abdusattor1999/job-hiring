@@ -1,0 +1,43 @@
+{% extends 'accounts/base.html' %}
+
+
+{% block content %}
+<div class="container p-5">
+    <img src="{{company.image.url}}" alt="Company image" style="width: 250px; height: 250px; border-radius: 50%;">
+    <h1>Kompaniya nomi : {{ company.name }}</h1>
+    <br>
+    <h4>Faoliyat sohasi : {{ company.topic }}</h4>
+    <br>
+    <hr>
+    <p>{{ company.about }}</p>
+    <hr>
+    <br>
+    <h6>Bog'lanish : {{ company.email }}</h6>
+    <h5>Manzil : {{ company.address }}</h5>
+    <br>
+    <hr>
+    <div class="row">
+    {% if v_quantity > 0 %}
+        <h4>Kompaniyaga tegishli vakansiyalar : (jami: {{v_quantity}}) ta</h4>
+        {% for post in vacancies %}
+        <div class="job-item p-3 m-2 col-md-12">       
+            <a href="{% url 'posts:post_detail' post.pk %}">
+                <div class="row  col-md-12">
+                    <div class="col-sm-12 d-flex align-items-center">
+                        <div class="text-start ps-4">
+                            <h5 class="mb-3">{{post.name}}</h5>
+                            <span class="text-truncate me-4"><i class="fa fa-map-marker-alt text-primary me-2"></i>{{ post.address |truncatechars:15 }}</span>
+                            <span class="text-truncate me-4"><i class="far fa-clock text-primary me-2"></i>{{ post.job_type }}</span>
+                            <span class="text-truncate me-4"><i class="far fa-money-bill-alt text-primary me-2"></i>{{post.salary}} $</span>
+                            <span class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>{{ post.created }}</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>     
+        {% endfor %}
+    {% endif %}
+
+    </div>
+</div>
+{% endblock content %}

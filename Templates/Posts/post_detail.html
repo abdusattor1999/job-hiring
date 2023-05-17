@@ -1,0 +1,29 @@
+{% extends 'accounts/base.html' %}
+
+{% block content %}
+<div class="container p-5">
+    <h1>{{post.name}}</h1>
+    <br>
+    <p>{{post.description}}</p>
+    <br>
+    <hr>
+    <h4><i class="far fa-money-bill-alt text-primary"></i> Maosh : {{ post.salary }}</h4>
+    <hr>
+    <div class="d-flex align-items-center col-md-12">
+        <img class="img-fluid flex-shrink-0 " src="{{ post.company.image.url }}" style="width: 60px; height: 60px; border-radius: 50%;">
+        <div class="ps-3 col-md-8">
+            <h5 class="mb-1">{{ owner.name }}</h5>
+            <small>{{ owner.email }}</small>
+        </div>
+        <a class="btn btn-primary py-3 px-5" href="{% url 'posts:send_app' owner.id %}">Ariza yuborish</a>
+    </div>
+
+
+</div>
+
+
+
+
+
+{% endblock content %}
+

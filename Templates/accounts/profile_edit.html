@@ -1,0 +1,9 @@
+{% extends 'accounts/base.html' %}
+
+{% block content %}
+    <form action="{% url 'accounts:profile_edit' %}" method="post" class="form-group p-5">
+        {% csrf_token %}
+        {{ profile_form.as_p }}
+         <input type="submit" value="Saqlash" class='btn btn-primary  py-2 px-5'>
+    </form>
+{% endblock content %}

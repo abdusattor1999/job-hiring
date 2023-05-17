@@ -1,0 +1,28 @@
+{% extends 'accounts/base.html' %}
+
+
+{% block content %}
+<div class="container p-5">
+    <h2 class="mt-5">Ismi : {{ user.first_name }}</h2>
+    <h3>Familiyasi : {{ user.last_name }}</h3>
+
+    <hr><br>
+    
+    <h6>Email :{% if user.email %} {{user.email}} {% else %} mavjud emas ! {% endif %}</h6>
+    <div class="row col-md-6">
+        <a class="btn btn-primary py-2 px-2 mx-1 mt-3 col-md-4" href="{% url 'accounts:company_create' %}">Kompaniya ochish</a>
+        <a class="btn btn-primary py-2 px-2 mx-1 mt-3 col-md-4" href="{% url 'accounts:user_edit' %}">Profilni o'zgartirish</a>
+        <a class="btn btn-danger py-2 px-2 mt-3 col-md-4" href="{% url 'accounts:confirm_delete' %}">O'chirish</a>
+        <a class="py-2" href="{% url 'logout' %}">Tizimdan chiqish</a>
+    </div>
+</div>
+
+{% endblock content %}
+
+
+
+
+
+
+
+

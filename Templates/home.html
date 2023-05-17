@@ -1,0 +1,86 @@
+{% extends 'accounts/base.html' %}
+
+{% block about %}
+<div class="container-xxl py-5" id='about_page'>
+    <div class="container">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                <div class="row g-0 about-bg rounded overflow-hidden">
+                    <div class="col-6 text-start">
+                        <img class="img-fluid w-100" src="https://www.cpacanada.ca/-/media/site/operational/hr-human-resources/images/00049-hr.jpg">
+                    </div>
+                    <div class="col-6 text-start">
+                        <img class="img-fluid" src="https://www.amcto.com/AMCTO/media/AmctoLibrary/Title%20images/AMCTO_Job_Opportunities.jpg?ext=.jpg" style="width: 85%; margin-top: 15%;">
+                    </div>
+                    <div class="col-6 text-end">
+                        <img class="img-fluid" src="https://blog.hubspot.com/hs-fs/hubfs/marketing-job-descriptions%20%281%29.jpg?width=595&height=400&name=marketing-job-descriptions%20%281%29.jpg" style="width: 85%;">
+                    </div>
+                    <div class="col-6 text-end">
+                        <img class="img-fluid w-100" src="https://xs.uz/upload/post/2019/10/31/08cadadd35978b60ef49fdac983476c41031.jpg">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                <h1 class="mb-4">Assalomu aleykum </h1>
+                <p class="mb-4">Bizning platforma mahallalardagi yoshlar haqidagi malumotlarni markazlashtish va Kompaniyalardagi mavjud ish o'rinlari haqdagi elonlarni jamlash uchun xizmat qiladi. Bu platforma orqali siz yoshlarni ishsizligi haqida malumot olishingiz yoki ish o'zinlari bilan tanishishingiz mumkin <br><br>Bizning maqsadimiz :</p>
+                <p><i class="fa fa-check text-primary me-3"></i>Mahallada yoshlar monitoringi</p>
+                <p><i class="fa fa-check text-primary me-3"></i>Yoshlarni ish bilan taminlash</p>
+                <p><i class="fa fa-check text-primary me-3"></i>Kompaniyalarga ishchi topishni osonlashtirish</p>
+                <a class="btn btn-primary py-3 px-5 mt-3" href="{% url 'accounts:profile_list' %}">Yoshlar haqida malumot</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock about %}
+
+
+{% block category %}
+
+    <div class="container-xxl p-5">
+        <div class="container">
+            {% comment %} <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Kategoriya bo'yicha qidirish</h1> {% endcomment %}
+            <div class="row g-4">
+                {% for categ in categories %}
+                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <a class="cat-item rounded p-3" href="{% url 'posts:post_list_with_category' categ.slug %}">
+                        <h4 class="mb-2">{{ categ.name }}</h4>
+                        <p class="mb-0">{{categ.vacancies}} ta vakansiya</p>
+                    </a>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+{% endblock category %}
+
+
+{% block hamkorlar %}
+<div class="container-xxl py-2 wow fadeInUp" data-wow-delay="0.1s">
+{% if amount > 0 %}
+<div class="container">
+    <h1> Hamkorlarimiz :</h1><br>
+        <div class="owl-carousel testimonial-carousel">
+            {% for comp in companies %}
+            <a href="{% url 'accounts:company_detail' comp.id %}">    
+                <div class="testimonial-item bg-light rounded p-4">
+                    <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
+                    <div class="d-flex align-items-center">
+                        <img class="img-fluid flex-shrink-0 " src="{{ comp.image.url }}" style="width: 60px; height: 60px; border-radius: 50%;">
+                        <div class="ps-3">
+                            <h5 class="mb-1">{{comp.name}}</h5>
+                            <small>Yo'nalish : {{comp.topic}}</small>
+                        </div>
+                    </div><br>
+                    <p>{{comp.about | truncatechars:40}}</p>
+                </div>
+            </a>
+            {% endfor %} 
+        </div>
+    </div>
+{% endif %} 
+</div>
+{% endblock hamkorlar %}
+
+
+
