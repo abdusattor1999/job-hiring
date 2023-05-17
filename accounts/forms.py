@@ -46,5 +46,4 @@ class ProfileEditForm(forms.ModelForm):
 class CompanyForm(forms.ModelForm):
     class Meta:
         model = Company
-        fields = "__all__"
-
+        fields = ('image', 'name', 'email', 'topic', 'about', 'address')

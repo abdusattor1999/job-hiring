@@ -26,9 +26,14 @@ def add_profile(request):
 
 def user_details(request):
     user = request.user
+    company = Company.objects.filter(user=user)
     context = {
         'user':user,
+        'company':company.last(),
+        'have_company':1 if company.exists() else 0
     }
+    print(user.id)
+    print(context)
     return render(request, 'accounts/profile_details.html', context)
 
 
@@ -166,10 +171,16 @@ def user_delete(request):
 def company_create(request):
     user = request.user
     if request.method == 'POST':
-        form = CompanyForm(data=request.POST, instance=user)
+        form = CompanyForm(instance=user, data=request.POST, files=request.FILES)
         if form.is_valid():
-            form.save()
-            return redirect('accounts:user_details')
+            cd = form.cleaned_data
+            cd['user'] = user
+            files = request.FILES
+            image = files.get('image')
+            print(cd,files, image)
+            # company = Company.objects.create(**form.cleaned_data)
+            # print(company)
+            return redirect('accounts:profile_details')
         else:
             conn = {
                 'text' : "Malumotlar to'g'ri kiritlmadi",
@@ -179,7 +190,7 @@ def company_create(request):
             return render(request, '404.html', conn)
     else:
         form = CompanyForm(instance=user)
-        return render(request, "company_create.html", {'form':form})
+        return render(request, "Company/company_create.html", {'form':form})
 
 
 

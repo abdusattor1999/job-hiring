@@ -4,7 +4,7 @@
 {% block content %}
 <div class="container p-5 col-md-8">
     <h3>Rostdan ham Foydalanuvchi malumotlarini o'chirib yubormoqchimisiz ? Harakatni tasdiqlang !</h3>
-    <a class="btn btn-primary py-2 px-2 mx-1 mt-3 col-md-4" href="{% url 'accounts:profile_details' request.user.id %}">Orqaga</a>
+    <a class="btn btn-primary py-2 px-2 mx-1 mt-3 col-md-4" href="{% url 'accounts:profile_details' %}">Orqaga</a>
     <a class="btn btn-danger py-2 px-2 mt-3 col-md-4" href="{% url 'accounts:user_delete' %}">Tasdiqlash</a>
 </div>
 {% endblock content %}

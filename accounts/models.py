@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 
 class Company(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='company')
     image = models.ImageField(upload_to='company_images/', blank=True, null=True)
     name = models.CharField(max_length=50, verbose_name='Kompaniya nomi')
     email = models.EmailField(verbose_name='Email manzil')
