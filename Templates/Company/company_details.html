@@ -18,7 +18,7 @@
     <hr>
     <div class="row">
     {% if v_quantity > 0 %}
-        <h4>Kompaniyaga tegishli vakansiyalar : (jami: {{v_quantity}}) ta</h4>
+        <h4>Kompaniyaga tegishli vakansiyalar : {{v_quantity}} ta</h4>
         {% for post in vacancies %}
         <div class="job-item p-3 m-2 col-md-12">       
             <a href="{% url 'posts:post_detail' post.pk %}">
