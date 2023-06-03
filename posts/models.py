@@ -31,6 +31,9 @@ class Post(models.Model):
     status = models.BooleanField(default=True, verbose_name='Aktivligi')
     created = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        verbose_name = 'Vacancy'
+        verbose_name_plural = 'Vacancies'
 
     def __str__(self) -> str:
         return self.name

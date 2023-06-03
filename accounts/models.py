@@ -13,6 +13,14 @@ class Company(models.Model):
 
     class Meta:
         verbose_name_plural = 'Companies'
+    
+    @property
+    def get_image(self):
+        image = 'Image none'
+        if self.image:
+            return self.image.url
+        else:
+            return image
 
     def __str__(self) -> str:
         return self.name

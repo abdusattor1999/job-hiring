@@ -8,6 +8,7 @@ urlpatterns = [
     path('login/', login_view, name='login'),
     path('company/<int:id>', company_detail, name="company_detail"),
     path('company/', company_create, name="company_create"),
+    path('vacancy/', vacancy_create, name="vacancy_create"),
     path('edit-profile/<int:id>', edit, name="profile_edit"),
     path('edit-user/', user_edit, name="user_edit"),
     path('confirm-delete/', confirm_delete, name="confirm_delete"),

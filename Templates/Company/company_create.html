@@ -1,20 +1,8 @@
 {% extends 'accounts/base.html' %}
 
 {% block content %}
-    <!-- <form action="." method="post" class="form-group p-5">
-        {% csrf_token %}
-        <label for="image">Rasm :</label>
-        <input type="file" name="image" class="form-control">
-        <input type="text" class="form-control mb-3" name='name' placeholder="Kompaniya nomi">
-        <input type="email" class="form-control mb-3" name='email' placeholder="Email pochtasi">
-        <input type="text" class="form-control mb-3" name='topic' placeholder="Faoliyat turi">
-        <input type="text" class="form-control mb-3" name='about' placeholder="Kompaniya haqida">
-        <input type="text" class="form-control mb-3" name="address" placeholder="Yuridik manzil">
-        
-        <input type="submit" value="Saqlash" class='btn btn-primary  py-2 px-5'>
-    </form> -->
 
-<form action="." class="form-group p-5" method="post">
+<form action="." class="form-group p-5" enctype='multipart/form-data' method="post">
     {{form.as_p}}
     {% csrf_token %}
 

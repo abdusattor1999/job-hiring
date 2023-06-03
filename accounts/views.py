@@ -32,16 +32,31 @@ def user_details(request):
         'company':company.last(),
         'have_company':1 if company.exists() else 0
     }
-    print(user.id)
-    print(context)
+
     return render(request, 'accounts/profile_details.html', context)
 
 
 def company_detail(request, id):
-    company = Company.objects.filter(id=id).last()
+    company = Company.objects.filter(id=id)
+    if company.exists():
+        company = company.last()
+    else:
+        conn = {
+            'text' : "Malumotlar to'g'ri kiritlmadi",
+            'about' : "Kompaniya malumotlari talabga javob bermaydi tekshirib qaytadan kiriting !",
+            'button' : 'Bosh menuga qaytish'
+            }
+        return render(request, '404.html', conn)
     vacancies = Post.objects.filter(company=company)
     v_quantity = len(vacancies)
-    context = {'company':company, 'vacancies':vacancies, "v_quantity":v_quantity}
+    svoy_comp = Company.objects.filter(user=request.user)
+    svoy = False
+    if svoy_comp.exists():
+        svoy = False
+        svoy_comp = svoy_comp.last()
+        if svoy_comp.id == company.id:
+            svoy = True
+    context = {'company':company, 'vacancies':vacancies, "v_quantity":v_quantity, 'svoy':svoy}
     return render(request, 'Company/company_details.html', context)
 
 
@@ -173,13 +188,10 @@ def company_create(request):
     if request.method == 'POST':
         form = CompanyForm(instance=user, data=request.POST, files=request.FILES)
         if form.is_valid():
-            cd = form.cleaned_data
-            cd['user'] = user
-            files = request.FILES
-            image = files.get('image')
-            print(cd,files, image)
-            # company = Company.objects.create(**form.cleaned_data)
-            # print(company)
+            data = form.cleaned_data
+            data['user'] = user
+            
+            company = Company.objects.create(**data)
             return redirect('accounts:profile_details')
         else:
             conn = {
@@ -193,5 +205,23 @@ def company_create(request):
         return render(request, "Company/company_create.html", {'form':form})
 
 
-
+@login_required
+def vacancy_create(request):
+    if request.method == 'POST':
+        form = VacancyForm(instance=request.user, data=request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            data['company'] = Company.objects.filter(user=request.user).last()
+            Post.objects.create(**data)
+        else:
+            conn = {
+                'text' : "Malumotlar to'g'ri kiritlmadi",
+                'about' : "Kompaniya malumotlari talabga javob bermaydi tekshirib qaytadan kiriting !",
+                'button' : 'Bosh menuga qaytish'
+                }
+            return render(request, '404.html', conn)    
+        return redirect('posts:home_page') 
+    else:
+        form = VacancyForm(instance=request.user)
+        return render(request, "Posts/post_create.html", {'form':form})
 

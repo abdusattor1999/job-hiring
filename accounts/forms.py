@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from .models import Profile, Company, Qualification
 from django import forms
-
+from posts.models import Post
 class ArizaForm(forms.Form):
     email = forms.EmailField(required=True)
     text = forms.TimeField(required=True)
@@ -47,3 +47,10 @@ class CompanyForm(forms.ModelForm):
     class Meta:
         model = Company
         fields = ('image', 'name', 'email', 'topic', 'about', 'address')
+
+
+class VacancyForm(forms.ModelForm):
+
+    class Meta:
+        model = Post
+        fields = ('name', 'category', 'description', 'address', 'job_type', 'salary', 'status')
