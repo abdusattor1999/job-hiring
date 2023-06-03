@@ -49,13 +49,14 @@ def company_detail(request, id):
         return render(request, '404.html', conn)
     vacancies = Post.objects.filter(company=company)
     v_quantity = len(vacancies)
-    svoy_comp = Company.objects.filter(user=request.user)
     svoy = False
-    if svoy_comp.exists():
-        svoy = False
-        svoy_comp = svoy_comp.last()
-        if svoy_comp.id == company.id:
-            svoy = True
+    if request.user.is_authenticated:
+        svoy_comp = Company.objects.filter(user=request.user)
+        if svoy_comp.exists():
+            svoy = False
+            svoy_comp = svoy_comp.last()
+            if svoy_comp.id == company.id:
+                svoy = True
     context = {'company':company, 'vacancies':vacancies, "v_quantity":v_quantity, 'svoy':svoy}
     return render(request, 'Company/company_details.html', context)
 
