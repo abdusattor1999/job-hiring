@@ -236,7 +236,7 @@ def bekorchilik_arizasi(request):
             data = form.cleaned_data
             form.save()
             message = f"Yoshi : {data['age']}\nKasbi : {data['kasbi']}\nDarajasi : {data['degree']}\nManzili : {data['address']}"
-            sendSimpleEmail("Ishsiz fuqaro arizasi", data["first_name"], message, data['phone'] , 'samandaregamberdiyev36@email.com')
+            sendSimpleEmail("Ishsiz fuqaro arizasi", data["first_name"], message, data['phone'] , 'egamberdiyevsamandar36@email.com')
             return redirect('posts:home_page')
         else:
             return HttpResponse("Forma to'g'ri to'ldirilmadi !")
