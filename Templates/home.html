@@ -22,11 +22,13 @@
             </div>
             <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
                 <h1 class="mb-4">Assalomu aleykum </h1>
-                <p class="mb-4">Bizning platforma mahallalardagi yoshlar haqidagi malumotlarni markazlashtish va Kompaniyalardagi mavjud ish o'rinlari haqdagi elonlarni jamlash uchun xizmat qiladi. Bu platforma orqali siz yoshlarni ishsizligi haqida malumot olishingiz yoki ish o'zinlari bilan tanishishingiz mumkin <br><br>Bizning maqsadimiz :</p>
+                <p class="mb-4">Bu platformada 'Orzu MFY' dagi yoshlar va kompaniyalarga ishchi o'rinlari haqdagi malumotlar bazasi joylashgan. Bu platforma orqali yoshlarni ish  bilan taminlash uchun xizmat qiladi. <br><br>Bizning maqsadimiz :</p>
                 <p><i class="fa fa-check text-primary me-3"></i>Mahallada yoshlar monitoringi</p>
                 <p><i class="fa fa-check text-primary me-3"></i>Yoshlarni ish bilan taminlash</p>
                 <p><i class="fa fa-check text-primary me-3"></i>Kompaniyalarga ishchi topishni osonlashtirish</p>
                 <a class="btn btn-primary py-3 px-5 mt-3" href="{% url 'accounts:profile_list' %}">Yoshlar haqida malumot</a>
+                <a class="btn btn-primary py-3 px-5 mt-3" href="{% url 'accounts:not_busies' pk=1 %}">Ishsizlar haqida malumot</a>
+                <a class="btn btn-danger mt-3" href="{% url 'accounts:bekorchilar_arizasi' %}">Ishsiz bo'lsangiz biz bilan bog'laning !</a>
             </div>
         </div>
     </div>
@@ -35,10 +37,9 @@
 
 
 {% block category %}
-
     <div class="container-xxl p-5">
         <div class="container">
-            {% comment %} <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Kategoriya bo'yicha qidirish</h1> {% endcomment %}
+            <h1 class="mb-3 wow fadeInUp" data-wow-delay="0.1s">Kategoriya bo'yicha qidirish</h1>
             <div class="row g-4">
                 {% for categ in categories %}
                 <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">

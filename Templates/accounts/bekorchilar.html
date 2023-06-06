@@ -1,0 +1,13 @@
+{% extends 'accounts/base.html' %}
+
+{% block content %}
+<form action="." method="post" class="form-group p-5">
+    {{form.as_p}}
+    {% csrf_token %}
+
+    <input class="btn btn-primary py-2 px-3" type="submit" value="Yuborish">
+</form>
+
+{% endblock content %}
+
+

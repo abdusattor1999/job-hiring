@@ -15,5 +15,7 @@ urlpatterns = [
     path('user-delete/', user_delete, name="user_delete"),
     path('user/', user_details, name="profile_details"),
     path('profile/', profile_list, name="profile_list"),
+    path('profile/<int:pk>/', profile_list, name="not_busies"),
     path('add-profile/', add_profile, name="add_profile"),
+    path('ariza/', bekorchilik_arizasi, name='bekorchilar_arizasi')
 ]

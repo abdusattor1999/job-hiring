@@ -7,8 +7,10 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 
 
-def profile_list(request):
+def profile_list(request, pk=None):
     users = Profile.objects.all()
+    if pk:
+        users = Profile.objects.filter(is_busy=False)
     return render(request, 'accounts/profile_list.html', {'users':users})
 
 
@@ -225,4 +227,21 @@ def vacancy_create(request):
     else:
         form = VacancyForm(instance=request.user)
         return render(request, "Posts/post_create.html", {'form':form})
+
+
+def bekorchilik_arizasi(request):
+    if request.method == 'POST':
+        form = BekorchilarUchunForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            form.save()
+            message = f"Yoshi : {data['age']}\nKasbi : {data['kasbi']}\nDarajasi : {data['degree']}\nManzili : {data['address']}"
+            sendSimpleEmail("Ishsiz fuqaro arizasi", data["first_name"], message, data['phone'] , 'samandaregamberdiyev36@email.com')
+            return redirect('posts:home_page')
+        else:
+            return HttpResponse("Forma to'g'ri to'ldirilmadi !")
+    else:
+        form = BekorchilarUchunForm()
+        return render(request, 'accounts/bekorchilar.html', {'form':form})
+
 

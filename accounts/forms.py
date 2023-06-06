@@ -54,3 +54,13 @@ class VacancyForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ('name', 'category', 'description', 'address', 'job_type', 'salary', 'status')
+
+class BekorchilarUchunForm(forms.ModelForm):
+    # ism = forms.CharField(max_length=25, required=True)
+    # familiya = forms.CharField(max_length=25, required=True)
+    # telefon = forms.CharField(max_length=15, required=True)
+    # yosh = forms.IntegerField(max_value=80, required=True)
+    # kasb = forms.CharField
+    class Meta:
+        model = Profile
+        fields = 'first_name', 'last_name', 'age', 'phone', 'kasbi', 'degree', 'address'
